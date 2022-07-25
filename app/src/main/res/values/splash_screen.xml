@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App.StartingSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_geek_vhite_background__</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.GeekShopAppBuy</item>
+    </style>
+</resources>

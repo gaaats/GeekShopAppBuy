@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.geekshopappbuy.presentation.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/baketFragment"
+        android:name="com.example.geekshopappbuy.presentation.BaketFragment"
+        android:label="fragment_baket"
+        tools:layout="@layout/fragment_baket" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.example.geekshopappbuy.presentation.GroupFragment"
+        android:label="fragment_group"
+        tools:layout="@layout/fragment_group" />
+    <fragment
+        android:id="@+id/itemsInsideGroupFragment"
+        android:name="com.example.geekshopappbuy.presentation.ItemsInsideGroupFragment"
+        android:label="fragment_items_inside_group"
+        tools:layout="@layout/fragment_items_inside_group" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.geekshopappbuy.presentation.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_baketFragment"
+            app:destination="@id/baketFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_groupFragment"
+            app:destination="@id/groupFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.example.geekshopappbuy.presentation.ContactsFragment"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts" />
+</navigation>

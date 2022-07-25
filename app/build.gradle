@@ -16,6 +16,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "API_KEY", API_KEY)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -113,7 +114,8 @@ dependencies {
     implementation 'com.airbnb.android:epoxy-paging3:4.6.4'
     kapt 'com.airbnb.android:epoxy-processor:4.6.4'
 
-
+    // Optional - APIs for SplashScreen, including compatiblity helpers on devices prior Android 12
+    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
 }
 kapt {
     correctErrorTypes = true
