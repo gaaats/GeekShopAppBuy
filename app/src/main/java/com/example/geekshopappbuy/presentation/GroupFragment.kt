@@ -1,24 +1,19 @@
 package com.example.geekshopappbuy.presentation
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.geekshopappbuy.R
-import com.example.geekshopappbuy.data.RetrofotIstance
 import com.example.geekshopappbuy.databinding.FragmentGroupBinding
-import com.example.geekshopappbuy.databinding.FragmentItemsInsideGroupBinding
 import com.example.geekshopappbuy.domain.entitys.GeekGroupUI
 import com.example.geekshopappbuy.presentation.adapters.GroupsListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.FragmentScoped
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,49 +25,44 @@ class GroupFragment : Fragment() {
     @Inject
     lateinit var groupAdapter: GroupsListAdapter
 
+    private val mainViewModel by activityViewModels<MainVievModel>()
+
     private var _binding: FragmentGroupBinding? = null
-    private val binding get() = _binding?: throw RuntimeException("ActivityMainBinding = null")
+    private val binding get() = _binding ?: throw RuntimeException("ActivityMainBinding = null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGroupBinding.inflate(inflater, container, false)
-        return binding.root    }
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val result = RetrofotIstance.api.getAllGroups()
-            if (result.isSuccessful){
-                Log.d("MY_TAG", "good")
-                result.body()!!.groups!!.forEach {
-                    Log.d("MY_TAG", "parent id ${it!!.parentGroupId}")
-                    Log.d("MY_TAG", "name ${it!!.name}")
-                }
-                converted = result.body()!!.groups!!.map {
-                    it!!.mapToUiModel()
-                }
-                val res = converted.filter {
-                    it.parentGroupId == 98516684
-                }.shuffled()
-//                converted.forEach {
-//                    Log.d("MY_TAG", "id ${it.id}")
-//                    Log.d("MY_TAG", "id ${it.name}")
-//                    Log.d("MY_TAG", "parent ${it.parentGroupId}")
-//                }
-                groupAdapter.submitList(res)
-                withContext(Dispatchers.Main){
-                    binding.recViev.adapter = groupAdapter
-                }
-            }
-            else{
-                Log.d("MY_TAG", "error")
-                Log.d("MY_TAG", "${result.code()}")
-            }
+        mainViewModel.navigateToGoods.observe(viewLifecycleOwner){
+            findNavController().navigate(R.id.action_groupFragment_to_productsFragment)
         }
 
+        initOnGroupClickListener()
+        binding.recViev.adapter = groupAdapter
+        mainViewModel.sortGroupsByParentId()
+        mainViewModel.listGroupCurrent.observe(viewLifecycleOwner) {
+            groupAdapter.submitList(it)
+        }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun initOnGroupClickListener() {
+        groupAdapter.setOnItemClickListener {
+            Toast.makeText(requireContext(), "group id: ${it}", Toast.LENGTH_SHORT).show()
+//            lifecycleScope.launch {
+//                mainViewModel.loadProductsByGroupId(it)
+//            }
+
+            // it`s good vork
+            mainViewModel.sortGroupsByParentId(it)
+        }
     }
 
     override fun onDestroy() {

@@ -1,7 +1,5 @@
 package com.example.geekshopappbuy.domain.entitys
 
-import com.example.retrofitrequestsimpletest1.api.response.Category
-
 data class GeekProductUI(
     val id: Int,
     val name: String?,

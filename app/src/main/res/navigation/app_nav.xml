@@ -19,12 +19,20 @@
         android:id="@+id/groupFragment"
         android:name="com.example.geekshopappbuy.presentation.GroupFragment"
         android:label="fragment_group"
-        tools:layout="@layout/fragment_group" />
+        tools:layout="@layout/fragment_group" >
+        <action
+            android:id="@+id/action_groupFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/itemsInsideGroupFragment"
-        android:name="com.example.geekshopappbuy.presentation.ItemsInsideGroupFragment"
+        android:id="@+id/productsFragment"
+        android:name="com.example.geekshopappbuy.presentation.ProductsFragment"
         android:label="fragment_items_inside_group"
-        tools:layout="@layout/fragment_items_inside_group" />
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_itemsInsideGroupFragment_to_groupFragment"
+            app:destination="@id/groupFragment" />
+    </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.geekshopappbuy.presentation.WelcomeFragment"

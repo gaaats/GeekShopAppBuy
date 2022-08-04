@@ -57,6 +57,9 @@ class WelcomeFragment : Fragment() {
 //            }
             findNavController().navigate(R.id.action_welcomeFragment_to_groupFragment)
         }
+        binding.btnStartScreenContactUs.setOnClickListener {
+            findNavController().navigate(R.id.action_welcomeFragment_to_contactsFragment)
+        }
     }
 
     override fun onDestroy() {

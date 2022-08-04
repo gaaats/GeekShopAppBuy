@@ -1,29 +1,27 @@
 package com.example.geekshopappbuy.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.geekshopappbuy.R
-import com.example.geekshopappbuy.databinding.FragmentContactsBinding
-import com.example.geekshopappbuy.databinding.FragmentItemsInsideGroupBinding
+import androidx.fragment.app.Fragment
+import com.example.geekshopappbuy.databinding.FragmentProductsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.FragmentScoped
 
 
 @AndroidEntryPoint
 @FragmentScoped
-class ItemsInsideGroupFragment : Fragment() {
+class ProductsFragment : Fragment() {
 
-    private var _binding: FragmentItemsInsideGroupBinding? = null
+    private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding?: throw RuntimeException("ActivityMainBinding = null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentItemsInsideGroupBinding.inflate(inflater, container, false)
+        _binding = FragmentProductsBinding.inflate(inflater, container, false)
         return binding.root    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

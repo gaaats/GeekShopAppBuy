@@ -1,4 +1,4 @@
-package com.example.retrofitrequestsimpletest1.api.response
+package com.example.geekshopappbuy.data.entity.products
 
 
 import com.google.gson.annotations.SerializedName

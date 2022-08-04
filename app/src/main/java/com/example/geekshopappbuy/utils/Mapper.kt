@@ -1,7 +1,7 @@
 package com.example.geekshopappbuy.utils
 
 import com.example.geekshopappbuy.domain.entitys.GeekProductUI
-import com.example.retrofitrequestsimpletest1.api.response.Product
+import com.example.geekshopappbuy.data.entity.products.Product
 
 object Mapper {
 

@@ -11,8 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class GroupsListAdapter @Inject constructor() :
+class GroupsListAdapter @Inject constructor(
+
+
+) :
     ListAdapter<GeekGroupUI, GroupRecVVievHolder>(GroupDiffUtill()) {
+
+    private var onItemClickListener : ((groupId: Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupRecVVievHolder {
         LayoutInflater.from(parent.context)
             .inflate(R.layout.single_item_group_, parent, false).also {
@@ -21,7 +27,6 @@ class GroupsListAdapter @Inject constructor() :
     }
 
     override fun onBindViewHolder(holder: GroupRecVVievHolder, position: Int) {
-
         val currentItem = getItem(position)
         holder.binding.apply {
             tvTitle.text = currentItem.name
@@ -35,6 +40,13 @@ class GroupsListAdapter @Inject constructor() :
                     }
                 }
             }
+            root.setOnClickListener {
+                onItemClickListener?.invoke(currentItem.id)
+            }
         }
+    }
+
+    fun setOnItemClickListener (listener: (groupId: Int)-> Unit){
+        onItemClickListener = listener
     }
 }
